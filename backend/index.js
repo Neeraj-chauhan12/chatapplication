@@ -1,0 +1,27 @@
+const express = require('express')
+const connectDB =require('./config/db.js')
+const dotenv =require('dotenv')
+const userrouter= require('./routers/userrouters.js')
+const cors = require("cors")
+
+const app=express();
+dotenv.config();
+
+//middlewares
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
+app.use(cors())
+
+
+//database connection
+const PORT=process.env.PORT || 4000
+connectDB();
+
+//routers
+app.use("/user",userrouter)
+
+
+//app is running here 
+app.listen(PORT, ()=>{
+    console.log(`app is running in port ${PORT}`);
+});

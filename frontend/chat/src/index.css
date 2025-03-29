@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+.scroll::-webkit-scrollbar{
+    display: none;
+
+}
+
+
+.user{
+    padding: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 30px;
+    font-size: 25px;
+    background-color: rgb(75, 72, 72);
+    max-width: 60vw;
+    min-width: 10vw;
+    align-self: flex-end;
+}
+
+.response{
+    padding: 3px;
+    padding-left: 20px;
+    border-radius: 30px;
+    font-size: 25px;
+    background-color:rgb(91, 94, 91);
+    max-width: 60vw;
+    align-self: flex-start;
+    min-width: 10vw;
+
+}
