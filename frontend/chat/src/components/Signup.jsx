@@ -41,7 +41,7 @@ const Signup = () => {
   return (
     <>
       <div className="bg-black flex justify-center text-white items-center h-screen w-screen">
-        <div className="border-2 border-green-300 py-10 gap-5 px-10 rounded-2xl flex flex-col justify-center items-center  bg-gray-900">
+        <div className="md:w-auto w-[90vw] border-2 border-green-300 py-10 gap-5 px-10 rounded-2xl flex flex-col justify-center items-center  bg-gray-900">
           <h2 className="text-4xl text-center">
             Sign up <span className="text-green-400">page</span>
           </h2>

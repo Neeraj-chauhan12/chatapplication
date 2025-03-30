@@ -6,13 +6,12 @@
 }
 
 
-.user{
+ .user{
     padding: 3px;
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 30px;
-    font-size: 25px;
-    background-color: rgb(75, 72, 72);
+    border-bottom-right-radius: 10px;
+    background-color: rgb(52, 50, 50);
     max-width: 60vw;
     min-width: 10vw;
     align-self: flex-end;
@@ -21,11 +20,11 @@
 .response{
     padding: 3px;
     padding-left: 20px;
-    border-radius: 30px;
-    font-size: 25px;
-    background-color:rgb(91, 94, 91);
+    border-top-right-radius: 20px;
+    background-color:rgb(46, 48, 46);
     max-width: 60vw;
     align-self: flex-start;
-    min-width: 10vw;
+    min-width: 10vw; 
 
-}
+} 
+
