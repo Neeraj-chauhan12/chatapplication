@@ -3,12 +3,14 @@ const connectDB =require('./config/db.js')
 const dotenv =require('dotenv')
 const userrouter= require('./routers/userrouters.js')
 const cors = require("cors")
+const path= require("path")
 
 const app=express();
 dotenv.config();
 
 //middlewares
 app.use(express.json());
+app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
