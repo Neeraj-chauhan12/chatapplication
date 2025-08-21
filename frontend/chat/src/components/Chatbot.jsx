@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { PiLinkSimpleDuotone } from "react-icons/pi";
 import { FaArrowUpLong } from "react-icons/fa6";
 import { GoogleGenerativeAI } from "@google/generative-ai"
-import { useAuth } from './context/AuthProvider';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { tomorrow as codeTheme } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { Paperclip, ArrowUp, Globe, Bot } from "lucide-react";
+import { oneDark as codeTheme } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 
 const Chatbot = () => {
@@ -16,6 +14,13 @@ const Chatbot = () => {
     
     const [promt,setPromt]=useState([])
     const [loading,setLoading]=useState(false)
+    const promtEndRef = useRef();
+
+
+      useEffect(() => {
+       promtEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [promt, loading]);
+
   
 
   const handleclick=async()=>{
@@ -24,26 +29,26 @@ const Chatbot = () => {
     if(!trimmed) return
     setInputValue("")
     setTypeValue(trimmed)
-     setLoading(true)
+    setLoading(true)
 
     try {
       const genAI = new GoogleGenerativeAI("AIzaSyCDM4b1iRCwpVSLHReK3mt6TWwzob6kvJA");
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const result = await model.generateContent(trimmed);
-      const response=result.response.text()
-      console.log(response)
+      const data= result.response.text()
+      console.log(data)
  
       setPromt((prev)=>[
         ...prev,
         {role:"user",trimmed},
-        {role:"asistent", response }
+        {role:"assistant",data }
       ])
       
     } catch (error) {
        setPromt((prev)=>[
         ...prev,
         {role:"user",trimmed},
-        {role:"asistent",response:"something went wrong the ai response"}
+        {role:"assistant",data:"something went wrong the ai response"}
       ])
       
     }
@@ -53,9 +58,6 @@ const Chatbot = () => {
 
     }
    }
-
-
-  //let allmessage=[];
 
 
   const handleEnter=(e)=>{
@@ -79,7 +81,7 @@ const Chatbot = () => {
          {/* Prompt  */}
          
                     {/* ➤ Scrollable Chat Box */}
-      <div className="w-full max-w-4xl flex-1 overflow-y-auto mt-6 mb-4 space-y-4 max-h-[60vh] px-1">
+      <div className="chat w-full max-w-4xl flex-1 overflow-y-auto mt-6 mb-4 space-y-4 max-h-[60vh] px-1">
         {promt.map((msg, index) => (
           <div
             key={index}
@@ -89,11 +91,11 @@ const Chatbot = () => {
           >
             {msg.role === "assistant" ? (
               // 🧠 Full-width assistant response
-              <div className="w-full bg-[#232323] text-white rounded-xl px-4 py-3 text-sm whitespace-pre-wrap">
+              <div className="w-[70%] bg-[#232323] text-white rounded-xl px-4 py-3 text-sm whitespace-pre-wrap">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    code({ node, inline, className, children, ...props }) {
+                    code({  inline, className, children, ...props }) {
                       const match = /language-(\w+)/.exec(className || "");
                       return !inline && match ? (
                         <SyntaxHighlighter
@@ -119,6 +121,14 @@ const Chatbot = () => {
                   {msg.response}
                 </ReactMarkdown>
               </div>
+
+
+              // <div className="w-[70%] bg-[#232323] text-white rounded-xl px-4 py-3 text-sm whitespace-pre-wrap">
+              //  {msg.data}
+              // </div>
+              
+
+              
             ) : (
               // 👤 User message - 30% width at top-right
               <div className="w-[30%] bg-blue-600 text-white rounded-xl px-4 py-3 text-sm whitespace-pre-wrap self-start">
@@ -130,6 +140,33 @@ const Chatbot = () => {
 
  
            </div>
+
+
+
+           {/* Show user's prompt while loading */}
+        {loading && typeValue && (
+          <div
+            className="whitespace-pre-wrap px-4 py-3 rounded-2xl text-sm break-words
+           bg-blue-600 text-white self-end ml-auto max-w-[40%]"
+          >
+            {typeValue}
+          </div>
+        )}
+
+
+
+
+                   {/* 🤖 Typing Indicator */}
+        {loading && (
+          <div className="flex justify-start w-full">
+            <div className="bg-[#2f2f2f] text-white px-4 py-3 rounded-xl text-sm animate-pulse">
+              🤖Loading...
+            </div>
+          </div>
+        )}
+
+        <div ref={promtEndRef} />
+
 
          
             {/* INPUT  BOX */}
