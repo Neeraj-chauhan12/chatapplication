@@ -3,23 +3,21 @@ import Signup from './components/Signup'
 import Login from './components/Login'
 import {Routes,Route, Navigate} from 'react-router-dom'
 import Chatbot from './components/Chatbot'
-import { useAuth } from './components/context/AuthProvider'
+import {Toaster} from 'react-hot-toast'
 
 const App = () => {
 
-  const [authUser,setauthUser]=useAuth();
+  const user = JSON.parse(localStorage.getItem('user'))
 
   return (
     <div>
     <Routes>
-       <Route path='/' element={authUser? <Chatbot/> :(<Navigate to={"/login"}/>) } />
-
-
-       <Route path="/login" element={ authUser ? <Navigate to="/" />:<Login/>} />
-
-       <Route path="/signup" element={authUser ? <Navigate to="/" />:<Signup />} />
+      <Route path="/" element={ user?<Chatbot />: <Navigate to={"/login"} /> }/>
+       <Route path="/signup" element={user?<Navigate to={"/"} />:<Signup />} />
+        <Route path="/login" element={user?<Navigate to={"/"} />:<Login />} />
     </Routes>
   
+  <Toaster />
     </div>
   )
 }

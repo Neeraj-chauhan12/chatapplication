@@ -1,41 +1,46 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAuth } from "./context/AuthProvider";
+import toast from "react-hot-toast";
+import { BACKEND_URL } from "../utils/Util";
 
 const Signup = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const [authUser,setauthUser]=useAuth();
+  } = useForm()
+  
+  const navigate=useNavigate()
 
   async function onSubmit(data) {
-    const userdata = {
+    const userData = {
       name: data.name,
       email: data.email,
       password: data.password,
     };
    // console.log(userdata);
-    await axios
-      .post("http://localhost:3001/user/signup", userdata)
-      .then((Response) => {
-        //console.log(Response.data);
-        console.log(authUser)
-        if (Response.data) {
-          alert("succesfully register");
-        }
-        localStorage.setItem("app", JSON.stringify(Response.data));
-        setauthUser(Response.data)
-      })
-      .catch((error) => {
-        if (error.Response){
-           alert("error",error.Response.data.error);
-        }
-      });
+   try{
+     const response= await axios.post(`${BACKEND_URL}/user/signup`,userData,
+      {
+        withCredentials:true,
+
+      }
+     )
+     toast.success("signup successfull")
+     navigate("/login")
+
+      
+    } catch (error) {
+      if(error.response){
+      console.log("error in signup page",error)
+      }
+      
+      
+    }
+    
+  
   }
 
   return (
@@ -93,7 +98,7 @@ const Signup = () => {
                 className="bg-blue-500 rounded-2xl py-1 px-5  border-2 border-blue-500"
                 type="submit"
               >
-                Login
+                Signup
               </button>
             </div>
           </form>

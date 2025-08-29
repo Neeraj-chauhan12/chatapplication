@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
-import { useAuth } from './context/AuthProvider';
+import { BACKEND_URL } from '../utils/Util';
+import toast from 'react-hot-toast';
 
 const Login = () => {
-  const [authUser,setauthUser]=useAuth();
   
     const {
       register,
@@ -13,32 +13,37 @@ const Login = () => {
       formState: { errors },
     } = useForm();
 
+    const navigate=useNavigate();
     
-    
-
-
     async function onSubmit(data){
       
-      const userdata={
+      const userData={
           email:data.email,
           password:data.password
         }
-       // console.log(userdata)
-        await axios
-        .post("http://localhost:3001/user/login",userdata)
-        .then((Response) =>{
-          //console.log(Response.data)
-          if(Response.data){
-            alert("login succesfully ")
-          }
-          localStorage.setItem("app", JSON.stringify(Response.data))
-          setauthUser(Response.data)
-        })
-      .catch ((error) => {
-        if(error.Response){
-        alert("error", error.Response.data.error) 
-        }
-      } )
+  
+      try {   
+     const response= await axios.post(`${BACKEND_URL}/user/login`,userData,
+      {
+        withCredentials:true,
+
+      }
+     )
+     
+     localStorage.setItem('user',JSON.stringify(response.data));
+     toast.success("login successfull")
+     navigate("/")
+     
+     
+      
+    } catch (error) {
+      if(error.response){
+      console.log("error in signup page",error)
+      }
+      
+      
+    }
+     
     }
     
 
