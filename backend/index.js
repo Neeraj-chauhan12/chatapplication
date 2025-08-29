@@ -16,6 +16,8 @@ app.use(express.urlencoded({extended:true}))
 app.use(cors({
     origin:process.env.FRONTEND_URL,
     credentials:true,
+    methods:["GET","POST","UPDATE","DELETE","OPTIONS"],
+    allowedHeaders:["Content-Type","Authorization","X-Requested-With"]
  
 }))
 
