@@ -13,8 +13,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}))
 
+const allowed=[process.env.FRONTEND_URL,process.env.FRONTEND_URL1]
 app.use(cors({
-    origin:process.env.FRONTEND_URL,
+    origin:function(origin,cb){
+        if(origin) return cd(null,true)
+        if(allowed.indexOf(origin)!== -1)cb(null,true)
+            else cb(new Error('not allowed by cors'));
+    },
     credentials:true,
     methods:["GET","POST","UPDATE","DELETE","OPTIONS"],
     allowedHeaders:["Content-Type","Authorization","X-Requested-With"]
