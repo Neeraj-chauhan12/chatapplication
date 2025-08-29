@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const jwt= require('jsonwebtoken')
-const Cookie =require('cookies-parser')
+
 
 const userschema=new mongoose.Schema({
     name:String,
@@ -13,11 +11,5 @@ const userschema=new mongoose.Schema({
     // customerId:String,
     // description:String,
 })
-
-
-//hashed password
-
-
-
 
 module.exports = mongoose.model("user",userschema);
