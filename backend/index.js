@@ -15,15 +15,16 @@ app.use(express.urlencoded({extended:true}))
 
 const allowed=[process.env.FRONTEND_URL,process.env.FRONTEND_URL1]
 app.use(cors({
-    origin:function(origin,cb){
-        if(origin) return cd(null,true)
-        if(allowed.indexOf(origin)!== -1)cb(null,true)
-            else cb(new Error('not allowed by cors'));
-    },
+    origin:process.env.FRONTEND_URL,
     credentials:true,
     methods:["GET","POST","UPDATE","DELETE","OPTIONS"],
     allowedHeaders:["Content-Type","Authorization","X-Requested-With"]
  
+}))
+
+app.options("*",cors({
+    origin:process.env.FRONTEND_URL,
+    credentials:true
 }))
 
 
