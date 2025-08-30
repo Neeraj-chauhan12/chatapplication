@@ -89,7 +89,8 @@ const Chatbot = () => {
       localStorage.removeItem("user")
       localStorage.removeItem("token")
       toast.success("logout succefully")  
-      navigate('/login')  
+      navigate('/login') 
+      window.location.reload() 
     } catch (error) {
       console.log("error in logout",error)
       toast.error(error.response.data.error || "logout error")
