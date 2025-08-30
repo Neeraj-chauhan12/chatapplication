@@ -19,11 +19,11 @@ const App = () => {
       
       </Route>
 
-      
+{/*       
       <Route path='/login' element={<ProtectedRoute user={!user} redirect='/'><Login /> </ProtectedRoute>} />
-      <Route path='/signup' element={<ProtectedRoute user={!user} redirect='/'><Signup /> </ProtectedRoute>} />
-       {/* <Route path='/signup' element={user?<Navigate to={'/'} />:<Signup />} />
-        <Route path='/login' element={user?<Navigate to={'/'} />:<Login />} /> */}
+      <Route path='/signup' element={<ProtectedRoute user={!user} redirect='/'><Signup /> </ProtectedRoute>} /> */}
+       <Route path='/signup' element={user?<Navigate to={'/'} />:<Signup />} />
+        <Route path='/login' element={user?<Navigate to={'/'} />:<Login />} />
     </Routes>
   
   <Toaster />
