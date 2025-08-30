@@ -29,7 +29,7 @@ const Signup = () => {
       }
      )
      toast.success("signup successfull")
-     navigate("/login")
+     navigate('/login')
 
       
     } catch (error) {

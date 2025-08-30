@@ -29,10 +29,9 @@ const Login = () => {
 
       }
      )
-     
-     localStorage.setItem('user',JSON.stringify(response.data));
      toast.success("login successfull")
-     navigate("/")
+     localStorage.setItem('user',JSON.stringify(response.data));
+     navigate('/')
      
      
       
