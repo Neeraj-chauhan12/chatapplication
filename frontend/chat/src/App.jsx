@@ -7,7 +7,8 @@ import {Toaster} from 'react-hot-toast'
 
 const App = () => {
 
-  const user = JSON.parse(localStorage.getItem('user'))
+  
+  const user=localStorage.getItem("user");
 
   return (
     <div>

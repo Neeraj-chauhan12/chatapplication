@@ -10,7 +10,7 @@ import pic from '../../public/pr.jpg'
 import { BACKEND_URL } from '../utils/Util';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 
 const Chatbot = () => {
@@ -88,7 +88,8 @@ const Chatbot = () => {
   
       toast.success(response.message)
       localStorage.removeItem("user")
-      navigate("/login")
+      navigate('/login')
+      redirect('/login')
       
       
       

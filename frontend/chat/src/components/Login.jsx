@@ -30,8 +30,8 @@ const Login = () => {
       }
      )
      toast.success("login successfull")
-     localStorage.setItem('user',JSON.stringify(response.data));
-    //  navigate('/')
+     localStorage.setItem("user",JSON.stringify(response.data));
+     navigate('/')
      redirect('/')
      
      
