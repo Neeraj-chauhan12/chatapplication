@@ -4,6 +4,7 @@ import Login from './components/Login'
 import {Routes,Route, Navigate} from 'react-router-dom'
 import Chatbot from './components/Chatbot'
 import {Toaster} from 'react-hot-toast'
+import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
 
@@ -13,9 +14,16 @@ const App = () => {
   return (
     <div>
     <Routes>
-      <Route path='/' element={ user?<Chatbot />: <Navigate to={'/login'} /> }/>
-       <Route path='/signup' element={user?<Navigate to={'/'} />:<Signup />} />
-        <Route path='/login' element={user?<Navigate to={'/'} />:<Login />} />
+       <Route element={<ProtectedRoute user={user}/>} > 
+      <Route path='/' element={<Chatbot /> } />
+      
+      </Route>
+
+      
+      <Route path='/login' element={<ProtectedRoute user={!user} redirect='/'><Login /> </ProtectedRoute>} />
+      <Route path='/signup' element={<ProtectedRoute user={!user} redirect='/'><Signup /> </ProtectedRoute>} />
+       {/* <Route path='/signup' element={user?<Navigate to={'/'} />:<Signup />} />
+        <Route path='/login' element={user?<Navigate to={'/'} />:<Login />} /> */}
     </Routes>
   
   <Toaster />
