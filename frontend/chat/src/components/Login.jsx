@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
 import { BACKEND_URL } from '../utils/Util';
@@ -31,7 +31,8 @@ const Login = () => {
      )
      toast.success("login successfull")
      localStorage.setItem('user',JSON.stringify(response.data));
-     navigate('/')
+    //  navigate('/')
+     redirect('/')
      
      
       
