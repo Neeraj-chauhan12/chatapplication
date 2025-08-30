@@ -1,1 +1,1 @@
-export const BACKEND_URL="https://chatapplication-e0ir.onrender.com"
+export const BACKEND_URL="https://chatapplication-1-b5eo.onrender.com"
