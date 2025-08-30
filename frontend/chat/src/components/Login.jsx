@@ -6,6 +6,8 @@ import { BACKEND_URL } from '../utils/Util';
 import toast from 'react-hot-toast';
 
 const Login = () => {
+
+  const navigate=useNavigate();
   
     const {
       register,
@@ -13,7 +15,8 @@ const Login = () => {
       formState: { errors },
     } = useForm();
 
-    const navigate=useNavigate();
+    
+    
     
     async function onSubmit(data){
       
@@ -29,12 +32,9 @@ const Login = () => {
 
       }
      )
-     toast.success("login successfull")
+     toast.success(response.data.message)
      localStorage.setItem("user",JSON.stringify(response.data));
-     console.log("local",localStorage.setItem("user",JSON.stringify(response.data)))
-     console.log(response.data)
      navigate('/')
-     redirect('/')
      
      
       
