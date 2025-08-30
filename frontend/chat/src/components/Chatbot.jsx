@@ -88,9 +88,9 @@ const Chatbot = () => {
   
       localStorage.removeItem("user")
       localStorage.removeItem("token")
-      toast.success(response.message)  
+      toast.success("logout succefully")  
       navigate('/login')
-      redirect('/login')
+    
       
       
       

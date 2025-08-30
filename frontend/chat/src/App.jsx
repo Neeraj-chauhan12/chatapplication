@@ -15,14 +15,8 @@ const App = () => {
   return (
     <div>
     <Routes>
-       <Route element={<ProtectedRoute user={user}/>} > 
-      <Route path='/' element={<Chatbot /> } />
       
-      </Route>
-
-{/*       
-      <Route path='/login' element={<ProtectedRoute user={!user} redirect='/'><Login /> </ProtectedRoute>} />
-      <Route path='/signup' element={<ProtectedRoute user={!user} redirect='/'><Signup /> </ProtectedRoute>} /> */}
+      <Route path='/' element={user?<Chatbot />: <Navigate to={'/login'} /> } />
        <Route path='/signup' element={user?<Navigate to={'/'} />:<Signup />} />
         <Route path='/login' element={user?<Navigate to={'/'} />:<Login />} />
     </Routes>
