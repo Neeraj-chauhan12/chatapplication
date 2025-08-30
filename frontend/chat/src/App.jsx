@@ -4,7 +4,6 @@ import Login from './components/Login'
 import {Routes,Route, Navigate} from 'react-router-dom'
 import Chatbot from './components/Chatbot'
 import {Toaster} from 'react-hot-toast'
-import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
 
