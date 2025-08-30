@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Signup from './components/Signup'
 import Login from './components/Login'
 import {Routes,Route, Navigate} from 'react-router-dom'
@@ -9,8 +9,16 @@ import ProtectedRoute from './components/ProtectedRoute'
 const App = () => {
 
   
-  const user=localStorage.getItem("user");
-  console.log("user",user)
+
+
+  const [user,setUser]=useState(null);
+
+  useEffect(()=>{
+    const saved=localStorage.getItem("user")
+    if(saved){
+      setUser(JSON.parse(saved))
+    }
+  },[])
 
   return (
     <div>

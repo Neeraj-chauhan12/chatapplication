@@ -19,7 +19,6 @@ const Login = () => {
     
     
     async function onSubmit(data){
-      
       const userData={
           email:data.email,
           password:data.password
@@ -28,15 +27,12 @@ const Login = () => {
       try {   
      const response= await axios.post(`${BACKEND_URL}/user/login`,userData,
       {
-        withCredentials:true,
-
+        withCredentials:true
       }
      )
      toast.success(response.data.message)
      localStorage.setItem("user",JSON.stringify(response.data));
-     navigate('/')
-     
-     
+     navigate('/')  
       
     } catch (error) {
       if(error.response){
