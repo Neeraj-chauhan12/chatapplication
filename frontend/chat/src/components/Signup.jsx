@@ -95,12 +95,7 @@ const Signup = () => {
                   login
                 </Link>
               </h1>
-              <button
-                className="bg-blue-500 rounded-2xl py-1 px-5  border-2 border-blue-500"
-                type="submit"
-              >
-                Signup
-              </button>
+              <button className="bg-blue-500 rounded-2xl py-1 px-5  border-2 border-blue-500">Signup</button>
             </div>
           </form>
         </div>

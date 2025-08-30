@@ -86,8 +86,8 @@ const Login = () => {
 
         {/* Submit Button */}
         <div className='flex justify-between items-center mt-3'>
-            <h1 className=''>New user?<Link to={"/Signup"} className='text-blue-500'>signup</Link></h1>
-          <button className='bg-blue-500 rounded-2xl py-1 px-5  border-2 border-blue-500' type="submit">Login</button>
+          <h1 className=''>New user?<Link to={"/Signup"} className='text-blue-500'>signup</Link></h1>
+          <button className='bg-blue-500 rounded-2xl py-1 px-5  border-2 border-blue-500'>Login</button>
         </div>
       </form>
     </div>
